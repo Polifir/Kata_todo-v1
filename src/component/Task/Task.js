@@ -1,8 +1,8 @@
-import { Component } from 'react';
-import PropTypes from 'prop-types';
-
-import './Task.css';
-import Timer from '../Timer';
+import { Component } from "react";
+import PropTypes from "prop-types";
+import "./Task.css";
+import { formatDistanceToNow } from "date-fns";
+import Timer from "../Timer";
 
 export default class Task extends Component {
   static defaultProps = {
@@ -46,22 +46,56 @@ export default class Task extends Component {
   render() {
     const { text, created, id, completed } = this.props.task;
     const { toggleStatus, deleteItem } = this.props;
-    const taskClass = this.state.editing ? 'editing' : completed ? 'completed' : '';
+    const taskClass = this.state.editing
+      ? "editing"
+      : completed
+      ? "completed"
+      : "";
     return (
       <li className={taskClass}>
+<<<<<<< HEAD
         <div className='view'>
           <input className='toggle' type='checkbox' onChange={() => toggleStatus(id)} checked={completed} />
+=======
+        <div className="view">
+          <input
+            className="toggle"
+            type="checkbox"
+            onChange={() => toggleStatus(id)}
+            checked={completed}
+          />
+>>>>>>> parent of f272c20 (add: lint)
           <label>
             <span className='description'>{text}</span>
             {/* <span className="created"> {this.setDate(created)}</span> */}
             <Timer created={created} />
           </label>
+<<<<<<< HEAD
           <button className='icon icon-edit' onClick={() => this.setState({ editing: true })} />
           <button className='icon icon-destroy' onClick={() => deleteItem(id)} />
         </div>
         {this.state.editing && (
           <form onSubmit={(e) => this.onSubmit(e)}>
             <input type='text' className='edit' value={this.state.text} onChange={(e) => this.onChange(e)} />
+=======
+          <button
+            className="icon icon-edit"
+            onClick={() => this.setState({ editing: true })}
+          ></button>
+          <button
+            className="icon icon-destroy"
+            onClick={() => deleteItem(id)}
+          ></button>
+        </div>
+        {this.state.editing && (
+          <form onSubmit={(e) => this.onSubmit(e)}>
+            <input
+              type="text"
+              class="edit"
+              value={this.state.text}
+              onChange={(e) => this.onChange(e)}
+            />
+>>>>>>> parent of f272c20 (add: lint)
           </form>
         )}
       </li>

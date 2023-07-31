@@ -1,5 +1,5 @@
-import { formatDistanceToNow } from 'date-fns';
-import { Component } from 'react';
+import { formatDistanceToNow } from "date-fns";
+import { Component } from "react";
 
 export default class Timer extends Component {
   state = {
@@ -22,8 +22,13 @@ export default class Timer extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <span className='created'>
         {' '}
+=======
+      <span className="created">
+        {" "}
+>>>>>>> parent of f272c20 (add: lint)
         {formatDistanceToNow(this.state.date, {
           addSuffix: true,
           includeSeconds: true,

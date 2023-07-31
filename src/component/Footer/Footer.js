@@ -1,11 +1,23 @@
-import './Footer.css';
+import "./Footer.css";
 
+<<<<<<< HEAD
 import TaskFilter from '../TaskFilter';
 import PropTypes from 'prop-types';
 
 export default function Footer({ itemsLeft, filters, onFilterSelect, deleteCompletedTask }) {
+=======
+import TaskFilter from "../TaskFilter";
+import PropTypes from "prop-types";
+
+export default function Footer({
+  itemsLeft,
+  filters,
+  onFilterSelect,
+  deleteCompletedTask,
+}) {
+>>>>>>> parent of f272c20 (add: lint)
   TaskFilter.defaultProps = {
-    itemsLeft: '',
+    itemsLeft: "",
     onFilterSelect() {},
     deleteCompletedTask() {},
     filters: [],
@@ -21,7 +33,11 @@ export default function Footer({ itemsLeft, filters, onFilterSelect, deleteCompl
       <span className='todo-count'>{itemsLeft} items left</span>
       <ul className='filters'>
         {filters.map((e) => (
-          <TaskFilter key={e.name} text={e.label} onFilterSelect={() => onFilterSelect(e.name)} />
+          <TaskFilter
+            key={e.name}
+            text={e.label}
+            onFilterSelect={() => onFilterSelect(e.name)}
+          />
         ))}
       </ul>
       <button className='clear-completed' onClick={() => deleteCompletedTask()}>
