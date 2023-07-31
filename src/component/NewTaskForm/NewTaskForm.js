@@ -6,6 +6,7 @@ export default class NewTaskForm extends Component {
   static defaultProps = {
     addNewItem: () => {},
   };
+
   static propTypes = {
     addNewItem: PropTypes.func,
   };
@@ -13,11 +14,13 @@ export default class NewTaskForm extends Component {
   state = {
     text: '',
   };
+
   onChange = (e) => {
     this.setState({
       text: e.target.value,
     });
   };
+
   onSubmit = (event) => {
     this.props.addNewItem(this.state.text);
     this.setState({
@@ -25,12 +28,13 @@ export default class NewTaskForm extends Component {
     });
     event.preventDefault();
   };
+
   render() {
     return (
       <form onSubmit={(e) => this.onSubmit(e)}>
         <input
-          className="new-todo"
-          placeholder="What needs to be done?"
+          className='new-todo'
+          placeholder='What needs to be done?'
           autoFocus
           value={this.state.text}
           onChange={(e) => this.onChange(e)}

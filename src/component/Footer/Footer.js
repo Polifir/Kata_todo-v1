@@ -1,8 +1,7 @@
 import './Footer.css';
 
-import PropTypes from 'prop-types';
-
 import TaskFilter from '../TaskFilter';
+import PropTypes from 'prop-types';
 
 export default function Footer({ itemsLeft, filters, onFilterSelect, deleteCompletedTask }) {
   TaskFilter.defaultProps = {
@@ -18,14 +17,14 @@ export default function Footer({ itemsLeft, filters, onFilterSelect, deleteCompl
     filters: PropTypes.arrayOf(PropTypes.object),
   };
   return (
-    <footer className="footer">
-      <span className="todo-count">{itemsLeft} items left</span>
-      <ul className="filters">
+    <footer className='footer'>
+      <span className='todo-count'>{itemsLeft} items left</span>
+      <ul className='filters'>
         {filters.map((e) => (
           <TaskFilter key={e.name} text={e.label} onFilterSelect={() => onFilterSelect(e.name)} />
         ))}
       </ul>
-      <button className="clear-completed" onClick={() => deleteCompletedTask()}>
+      <button className='clear-completed' onClick={() => deleteCompletedTask()}>
         Clear completed
       </button>
     </footer>

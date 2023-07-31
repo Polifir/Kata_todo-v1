@@ -10,11 +10,13 @@ export default class Task extends Component {
     toggleStatus() {},
     deleteItem() {},
   };
+
   static propTypes = {
     deleteItem: PropTypes.func,
     toggleStatus: PropTypes.func,
     task: PropTypes.object,
   };
+
   state = {
     text: this.props.task.text,
     editing: false,
@@ -47,19 +49,19 @@ export default class Task extends Component {
     const taskClass = this.state.editing ? 'editing' : completed ? 'completed' : '';
     return (
       <li className={taskClass}>
-        <div className="view">
-          <input className="toggle" type="checkbox" onChange={() => toggleStatus(id)} checked={completed} />
+        <div className='view'>
+          <input className='toggle' type='checkbox' onChange={() => toggleStatus(id)} checked={completed} />
           <label>
-            <span className="description">{text}</span>
+            <span className='description'>{text}</span>
             {/* <span className="created"> {this.setDate(created)}</span> */}
             <Timer created={created} />
           </label>
-          <button className="icon icon-edit" onClick={() => this.setState({ editing: true })}></button>
-          <button className="icon icon-destroy" onClick={() => deleteItem(id)}></button>
+          <button className='icon icon-edit' onClick={() => this.setState({ editing: true })} />
+          <button className='icon icon-destroy' onClick={() => deleteItem(id)} />
         </div>
         {this.state.editing && (
           <form onSubmit={(e) => this.onSubmit(e)}>
-            <input type="text" className="edit" value={this.state.text} onChange={(e) => this.onChange(e)} />
+            <input type='text' className='edit' value={this.state.text} onChange={(e) => this.onChange(e)} />
           </form>
         )}
       </li>

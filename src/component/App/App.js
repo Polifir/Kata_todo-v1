@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 import './App.css';
 import NewTaskForm from '../NewTaskForm';
@@ -77,29 +77,28 @@ export default class App extends Component {
       taskArray: this.state.taskArray.toSpliced(idx, 1),
     });
   };
-  deleteCompletedTask = () => {
-    return this.setState({
+
+  deleteCompletedTask = () =>
+    this.setState({
       taskArray: this.state.taskArray.filter((e) => e.completed !== true),
     });
-  };
 
-  itemsLeft = () => {
-    return this.state.taskArray.filter((e) => e.completed === false).length;
-  };
+  itemsLeft = () => this.state.taskArray.filter((e) => e.completed === false).length;
 
   filteredTasks = (filter) => {
     const { taskArray } = this.state;
     switch (filter) {
       case 'all':
-      return taskArray;
-    case 'active':
-      return taskArray.filter((task) => task.completed === false);
-    case 'completed':
-      return taskArray.filter((task) => task.completed === true);
-    default:
-      return taskArray;
+        return taskArray;
+      case 'active':
+        return taskArray.filter((task) => task.completed === false);
+      case 'completed':
+        return taskArray.filter((task) => task.completed === true);
+      default:
+        return taskArray;
     }
   };
+
   onFilterSelect = (filter) => {
     this.setState({ filter });
   };
@@ -108,12 +107,12 @@ export default class App extends Component {
     const { filter } = this.state;
     const visibleTask = this.filteredTasks(filter);
     return (
-      <section className="todoapp">
-        <header className="header">
+      <section className='todoapp'>
+        <header className='header'>
           <h1>todos</h1>
           <NewTaskForm addNewItem={this.addNewItem} />
         </header>
-        <section className="main">
+        <section className='main'>
           <TaskList
             TaskArray={this.state.taskArray}
             toggleStatus={() => this.toggleStatus}

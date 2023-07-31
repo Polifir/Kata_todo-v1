@@ -22,7 +22,7 @@ export default class Timer extends Component {
 
   render() {
     return (
-      <span className="created">
+      <span className='created'>
         {' '}
         {formatDistanceToNow(this.state.date, {
           addSuffix: true,

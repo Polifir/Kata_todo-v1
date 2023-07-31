@@ -11,15 +11,17 @@ export default class TaskList extends Component {
     deleteItem() {},
     editTask() {},
   };
+
   static propTypes = {
     deleteItem: PropTypes.func,
     toggleStatus: PropTypes.func,
     task: PropTypes.object,
     editTask: PropTypes.func,
   };
+
   render() {
     return (
-      <ul className="todo-list">
+      <ul className='todo-list'>
         {this.props.tasks.map((task) => (
           <Task
             task={task}
