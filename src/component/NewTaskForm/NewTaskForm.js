@@ -1,6 +1,6 @@
-import { Component } from "react";
-import PropTypes from "prop-types";
-import "./NewTaskForm.css";
+import { Component } from 'react';
+import PropTypes from 'prop-types';
+import './NewTaskForm.css';
 
 export default class NewTaskForm extends Component {
   static defaultProps = {
@@ -11,7 +11,7 @@ export default class NewTaskForm extends Component {
   };
 
   state = {
-    text: "",
+    text: '',
   };
   onChange = (e) => {
     this.setState({
@@ -21,7 +21,7 @@ export default class NewTaskForm extends Component {
   onSubmit = (event) => {
     this.props.addNewItem(this.state.text);
     this.setState({
-      text: "",
+      text: '',
     });
     event.preventDefault();
   };

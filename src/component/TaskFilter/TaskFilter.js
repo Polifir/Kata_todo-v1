@@ -1,9 +1,9 @@
-import "./TaskFilter.css";
-import PropTypes from "prop-types";
+import './TaskFilter.css';
+import PropTypes from 'prop-types';
 
 export default function TaskFilter({ text, onFilterSelect }) {
   TaskFilter.defaultProps = {
-    text: "",
+    text: '',
     onFilterSelect() {},
   };
   TaskFilter.propTypes = {

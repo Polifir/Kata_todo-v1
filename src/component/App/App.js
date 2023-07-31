@@ -1,31 +1,32 @@
-import { Component } from "react";
-import "./App.css";
-import NewTaskForm from "../NewTaskForm";
-import TaskList from "../TaskList";
-import Footer from "../Footer";
+import { Component } from 'react';
+
+import './App.css';
+import NewTaskForm from '../NewTaskForm';
+import TaskList from '../TaskList/index';
+import Footer from '../Footer/index';
 
 export default class App extends Component {
   state = {
     taskArray: [
       {
         id: 1,
-        text: "text",
+        text: 'text',
         completed: false,
         created: new Date(),
       },
       {
         id: 2,
-        text: "text",
+        text: 'text',
         completed: true,
         created: new Date(2023, 4, 15, 3),
       },
     ],
     filters: [
-      { name: "all", label: "All" },
-      { name: "active", label: "Active" },
-      { name: "completed", label: "Completed" },
+      { name: 'all', label: 'All' },
+      { name: 'active', label: 'Active' },
+      { name: 'completed', label: 'Completed' },
     ],
-    filter: "all",
+    filter: 'all',
   };
 
   addNewItem = (text) => {
@@ -89,14 +90,14 @@ export default class App extends Component {
   filteredTasks = (filter) => {
     const { taskArray } = this.state;
     switch (filter) {
-      case "all":
-        return taskArray;
-      case "active":
-        return taskArray.filter((task) => task.completed === false);
-      case "completed":
-        return taskArray.filter((task) => task.completed === true);
-      default:
-        return taskArray;
+      case 'all':
+      return taskArray;
+    case 'active':
+      return taskArray.filter((task) => task.completed === false);
+    case 'completed':
+      return taskArray.filter((task) => task.completed === true);
+    default:
+      return taskArray;
     }
   };
   onFilterSelect = (filter) => {
