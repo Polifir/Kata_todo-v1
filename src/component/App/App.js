@@ -3,7 +3,6 @@ import "./App.css";
 import NewTaskForm from "../NewTaskForm";
 import TaskList from "../TaskList";
 import Footer from "../Footer";
-import { formatDistanceToNow } from "date-fns";
 
 export default class App extends Component {
   state = {
@@ -12,13 +11,13 @@ export default class App extends Component {
         id: 1,
         text: "text",
         completed: false,
-        created: formatDistanceToNow(new Date(2014, 6, 2), { addSuffix: true }),
+        created: new Date(),
       },
       {
         id: 2,
         text: "text",
         completed: true,
-        created: formatDistanceToNow(new Date(2014, 6, 2), { addSuffix: true }),
+        created: new Date(2023, 4, 15, 3),
       },
     ],
     filters: [
@@ -34,7 +33,7 @@ export default class App extends Component {
       id: Math.max(...this.state.taskArray.map((e) => e.id)) + 1,
       text,
       completed: false,
-      created: formatDistanceToNow(new Date(), { addSuffix: true }),
+      created: new Date(),
     };
     console.log(newItem);
     this.setState({
@@ -51,9 +50,7 @@ export default class App extends Component {
             ...item,
             text: prop,
             completed: false,
-            created: formatDistanceToNow(new Date(), {
-              addSuffix: true,
-            }),
+            created: new Date(),
           };
         }
         return item;

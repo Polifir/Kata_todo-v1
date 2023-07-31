@@ -1,11 +1,24 @@
 import { Component } from "react";
-
+import PropTypes from "prop-types";
 import "./Task.css";
+import { formatDistanceToNow } from "date-fns";
+import Timer from "../Timer";
 
 export default class Task extends Component {
+  static defaultProps = {
+    task: {},
+    toggleStatus() {},
+    deleteItem() {},
+  };
+  static propTypes = {
+    deleteItem: PropTypes.func,
+    toggleStatus: PropTypes.func,
+    task: PropTypes.object,
+  };
   state = {
     text: this.props.task.text,
     editing: false,
+    toggle: this.props.task.completed,
   };
 
   onChange = (e) => {
@@ -13,9 +26,14 @@ export default class Task extends Component {
       text: e.target.value,
     });
   };
+  // setDate = (created) => {
+  //   return formatDistanceToNow(created, {
+  //     addSuffix: true,
+  //     includeSeconds: true,
+  //   });
+  // };
 
   onSubmit = (e) => {
-    console.log(this.props.task.id, this.state.text);
     this.props.editTask(this.props.task.id, this.state.text);
     this.setState({
       editing: false,
@@ -37,12 +55,13 @@ export default class Task extends Component {
           <input
             className="toggle"
             type="checkbox"
-            onClick={() => toggleStatus(id)}
+            onChange={() => toggleStatus(id)}
             checked={completed}
           />
           <label>
             <span className="description">{text}</span>
-            <span className="created">{created}</span>
+            {/* <span className="created"> {this.setDate(created)}</span> */}
+            <Timer created={created} />
           </label>
           <button
             className="icon icon-edit"

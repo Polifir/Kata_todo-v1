@@ -1,9 +1,21 @@
 import { Component } from "react";
-
+import PropTypes from "prop-types";
 import "./TaskList.css";
 import Task from "../Task/Task";
 
 export default class TaskList extends Component {
+  static defaultProps = {
+    task: {},
+    toggleStatus() {},
+    deleteItem() {},
+    editTask() {},
+  };
+  static propTypes = {
+    deleteItem: PropTypes.func,
+    toggleStatus: PropTypes.func,
+    task: PropTypes.object,
+    editTask: PropTypes.func,
+  };
   render() {
     return (
       <ul className="todo-list">
