@@ -1,31 +1,31 @@
-import { Component } from "react";
-import "./App.css";
-import NewTaskForm from "../NewTaskForm";
-import TaskList from "../TaskList";
-import Footer from "../Footer";
+import { Component } from 'react';
+import './App.css';
+import NewTaskForm from '../NewTaskForm';
+import TaskList from '../TaskList';
+import Footer from '../Footer';
 
 export default class App extends Component {
   state = {
     taskArray: [
       {
         id: 1,
-        text: "text",
+        text: 'text',
         completed: false,
         created: new Date(),
       },
       {
         id: 2,
-        text: "text",
+        text: 'text',
         completed: true,
         created: new Date(2023, 4, 15, 3),
       },
     ],
     filters: [
-      { name: "all", label: "All" },
-      { name: "active", label: "Active" },
-      { name: "completed", label: "Completed" },
+      { name: 'all', label: 'All' },
+      { name: 'active', label: 'Active' },
+      { name: 'completed', label: 'Completed' },
     ],
-    filter: "all",
+    filter: 'all',
   };
 
   addNewItem = (text) => {
@@ -89,11 +89,11 @@ export default class App extends Component {
   filteredTasks = (filter) => {
     const { taskArray } = this.state;
     switch (filter) {
-      case "all":
+      case 'all':
         return taskArray;
-      case "active":
+      case 'active':
         return taskArray.filter((task) => task.completed === false);
-      case "completed":
+      case 'completed':
         return taskArray.filter((task) => task.completed === true);
       default:
         return taskArray;
@@ -107,12 +107,12 @@ export default class App extends Component {
     const { filter } = this.state;
     const visibleTask = this.filteredTasks(filter);
     return (
-      <section className="todoapp">
-        <header className="header">
+      <section className='todoapp'>
+        <header className='header'>
           <h1>todos</h1>
           <NewTaskForm addNewItem={this.addNewItem} />
         </header>
-        <section className="main">
+        <section className='main'>
           <TaskList
             TaskArray={this.state.taskArray}
             toggleStatus={() => this.toggleStatus}

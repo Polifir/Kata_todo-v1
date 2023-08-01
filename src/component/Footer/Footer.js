@@ -1,7 +1,7 @@
-import "./Footer.css";
+import './Footer.css';
 
-import TaskFilter from "../TaskFilter";
-import PropTypes from "prop-types";
+import TaskFilter from '../TaskFilter';
+import PropTypes from 'prop-types';
 
 export default function Footer({
   itemsLeft,
@@ -9,22 +9,10 @@ export default function Footer({
   onFilterSelect,
   deleteCompletedTask,
 }) {
-  TaskFilter.defaultProps = {
-    itemsLeft: "",
-    onFilterSelect() {},
-    deleteCompletedTask() {},
-    filters: [],
-  };
-  TaskFilter.propTypes = {
-    itemsLeft: PropTypes.string,
-    onFilterSelect: PropTypes.func,
-    deleteCompletedTask: PropTypes.func,
-    filters: PropTypes.arrayOf(PropTypes.object),
-  };
   return (
-    <footer className="footer">
-      <span className="todo-count">{itemsLeft} items left</span>
-      <ul className="filters">
+    <footer className='footer'>
+      <span className='todo-count'>{itemsLeft} items left</span>
+      <ul className='filters'>
         {filters.map((e) => (
           <TaskFilter
             key={e.name}
@@ -33,9 +21,22 @@ export default function Footer({
           />
         ))}
       </ul>
-      <button className="clear-completed" onClick={() => deleteCompletedTask()}>
+      <button className='clear-completed' onClick={() => deleteCompletedTask()}>
         Clear completed
       </button>
     </footer>
   );
 }
+Footer.propTypes = {
+  itemsLeft: PropTypes.string,
+  onFilterSelect: PropTypes.func,
+  deleteCompletedTask: PropTypes.func,
+  filters: PropTypes.arrayOf(PropTypes.object),
+};
+
+Footer.defaultProps = {
+  itemsLeft: '',
+  onFilterSelect() {},
+  deleteCompletedTask() {},
+  filters: [],
+};

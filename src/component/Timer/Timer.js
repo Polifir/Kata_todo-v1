@@ -1,13 +1,20 @@
-import { formatDistanceToNow } from "date-fns";
-import { Component } from "react";
+import { Component } from 'react';
+
+import { formatDistanceToNow } from 'date-fns';
 
 export default class Timer extends Component {
+  static propTypes = {
+    created: this.PropTypes.date
+
+  }
   state = {
     date: this.props.created,
   };
 
+  static
+
   componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
+    this.timerID = setInterval(() => this.tick(), 5000);
   }
 
   componentWillUnmount() {
@@ -22,8 +29,8 @@ export default class Timer extends Component {
 
   render() {
     return (
-      <span className="created">
-        {" "}
+      <span className='created'>
+        {' '}
         {formatDistanceToNow(this.state.date, {
           addSuffix: true,
           includeSeconds: true,

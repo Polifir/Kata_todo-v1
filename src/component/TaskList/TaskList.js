@@ -1,7 +1,7 @@
-import { Component } from "react";
-import PropTypes from "prop-types";
-import "./TaskList.css";
-import Task from "../Task/Task";
+import { Component } from 'react';
+import PropTypes from 'prop-types';
+import './TaskList.css';
+import Task from '../Task/Task';
 
 export default class TaskList extends Component {
   static defaultProps = {
@@ -15,10 +15,11 @@ export default class TaskList extends Component {
     toggleStatus: PropTypes.func,
     task: PropTypes.object,
     editTask: PropTypes.func,
+    tasks: PropTypes.array,
   };
   render() {
     return (
-      <ul className="todo-list">
+      <ul className='todo-list'>
         {this.props.tasks.map((task) => (
           <Task
             task={task}
