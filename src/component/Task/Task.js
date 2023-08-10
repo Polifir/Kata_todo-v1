@@ -42,7 +42,7 @@ export default class Task extends Component {
   };
 
   render() {
-    const { text, created, id, completed } = this.props.task;
+    const { text, time, id, completed } = this.props.task;
     const { toggleStatus, deleteItem } = this.props;
     const taskClass = this.state.editing
       ? "editing"
@@ -61,7 +61,7 @@ export default class Task extends Component {
           <label>
             <span className="description">{text}</span>
             {/* <span className="created"> {this.setDate(created)}</span> */}
-            <Timer created={created} />
+            <Timer/>
           </label>
           <button
             className="icon icon-edit"

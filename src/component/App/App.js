@@ -11,13 +11,13 @@ export default class App extends Component {
         id: 1,
         text: 'text',
         completed: false,
-        created: new Date(),
+        time: 0,
       },
       {
         id: 2,
         text: 'text',
         completed: true,
-        created: new Date(2023, 4, 15, 3),
+        time: 0,
       },
     ],
     filters: [
@@ -33,7 +33,7 @@ export default class App extends Component {
       id: Math.max(...this.state.taskArray.map((e) => e.id)) + 1,
       text,
       completed: false,
-      created: new Date(),
+      time: 0,
     };
     console.log(newItem);
     this.setState({
@@ -50,7 +50,7 @@ export default class App extends Component {
             ...item,
             text: prop,
             completed: false,
-            created: new Date(),
+            time:  0,
           };
         }
         return item;
