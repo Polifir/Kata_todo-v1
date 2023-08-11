@@ -1,35 +1,40 @@
-import { Component } from 'react';
+
 import PropTypes from 'prop-types';
 import './TaskList.css';
-import Task from '../Task/Task';
+import Task from '../Task';
 
-export default class TaskList extends Component {
-  static defaultProps = {
-    task: {},
-    toggleStatus() {},
-    deleteItem() {},
-    editTask() {},
-  };
-  static propTypes = {
-    deleteItem: PropTypes.func,
-    toggleStatus: PropTypes.func,
-    task: PropTypes.object,
-    editTask: PropTypes.func,
-    tasks: PropTypes.array,
-  };
-  render() {
+export const TaskList = ({  tasks,
+  toggleStatus,
+  deleteItem,
+  editTask,}) => {
+
     return (
       <ul className='todo-list'>
-        {this.props.tasks.map((task) => (
+        {tasks.map((task) => (
           <Task
             task={task}
             key={task.id}
-            toggleStatus={this.props.toggleStatus(task.id)}
-            deleteItem={this.props.deleteItem(task.id)}
-            editTask={this.props.editTask}
+            toggleStatus={toggleStatus(task.id)}
+            deleteItem={deleteItem(task.id)}
+            editTask={editTask}
           />
         ))}
       </ul>
     );
-  }
+
 }
+
+Task.defaultProps = {
+  tasks: {},
+  toggleStatus() {},
+  deleteItem() {},
+  editTask() {},
+};
+
+Task.propTypes = {
+  deleteItem: PropTypes.func,
+  toggleStatus: PropTypes.func,
+  task: PropTypes.object,
+  editTask: PropTypes.func,
+  tasks: PropTypes.array,
+};

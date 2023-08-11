@@ -1,40 +1,39 @@
-import { Component } from 'react';
+import {useState } from 'react';
 import PropTypes from 'prop-types';
 import './NewTaskForm.css';
 
-export default class NewTaskForm extends Component {
-  state = {
-    text: '',
+export const NewTaskForm = ({addNewItem}) =>{
+  const [text, setText] = useState("")
+
+  
+  const onChange = (e) => {
+    setText(
+      e.target.value,
+    );
   };
-  static defaultProps = {
-    addNewItem: () => {},
-  };
-  static propTypes = {
-    addNewItem: PropTypes.func,
-  };
-  onChange = (e) => {
-    this.setState({
-      text: e.target.value,
-    });
-  };
-  onSubmit = (event) => {
-    this.props.addNewItem(this.state.text);
-    this.setState({
-      text: '',
-    });
+  const onSubmit = (event) => {
+    addNewItem(text);
+    setText("");
     event.preventDefault();
   };
-  render() {
+
     return (
-      <form onSubmit={(e) => this.onSubmit(e)}>
+      <form onSubmit={(e) => onSubmit(e)}>
         <input
           className='new-todo'
           placeholder='What needs to be done?'
           autoFocus
-          value={this.state.text}
-          onChange={(e) => this.onChange(e)}
+          value={text}
+          onChange={(e) => onChange(e)}
         />
       </form>
     );
-  }
 }
+
+NewTaskForm.defaultProps = {
+  addNewItem: () => {},
+};
+
+NewTaskForm.propTypes = {
+  addNewItem: PropTypes.func,
+};

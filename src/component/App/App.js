@@ -1,93 +1,84 @@
-import { Component } from 'react';
+import {  useState } from 'react';
 import './App.css';
 import NewTaskForm from '../NewTaskForm';
 import TaskList from '../TaskList';
 import Footer from '../Footer';
 
-export default class App extends Component {
-  state = {
-    taskArray: [
-      {
-        id: 1,
-        text: 'text',
-        completed: false,
-        time: 0,
-      },
-      {
-        id: 2,
-        text: 'text',
-        completed: true,
-        time: 0,
-      },
-    ],
-    filters: [
-      { name: 'all', label: 'All' },
-      { name: 'active', label: 'Active' },
-      { name: 'completed', label: 'Completed' },
-    ],
-    filter: 'all',
-  };
+export const App= () =>{
+  const [taskArray, setTaskArray] = useState([
+    {
+      id: 1,
+      text: 'text',
+      completed: false,
+      time: 0,
+    },
+    {
+      id: 2,
+      text: 'text',
+      completed: true,
+      time: 0,
+    },
+  ])
+  const [filtersArray, setFiltersArray]= useState([
+    { name: 'all', label: 'All' },
+    { name: 'active', label: 'Active' },
+    { name: 'completed', label: 'Completed' },
+  ],)
+  const [activeFilter, setActiveFilter] = useState("all")
 
-  addNewItem = (text) => {
+   const addNewItem = (text) => {
     const newItem = {
-      id: Math.max(...this.state.taskArray.map((e) => e.id)) + 1,
+      id: Math.max(...taskArray.map((e) => e.id)) + 1,
       text,
       completed: false,
       time: 0,
     };
-    console.log(newItem);
-    this.setState({
-      taskArray: [newItem, ...this.state.taskArray],
-    });
+    setTaskArray([
+      newItem, ...taskArray,
+    ]);
   };
 
-  editTask = (id, prop) => {
-    this.setState(({ taskArray }) => ({
-      taskArray: taskArray.map((item) => {
-        if (item.id === id) {
-          console.log(id, { ...item, text: prop });
-          return {
-            ...item,
-            text: prop,
-            completed: false,
-            time:  0,
-          };
-        }
-        return item;
-      }),
-    }));
+   const editTask = (id, prop) => {
+    setTaskArray(taskArray.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          text: prop,
+          completed: false,
+          time:  0,
+        };
+      }
+      return item;
+    }),) 
   };
 
-  toggleStatus = (id) => {
-    const newArr = this.state.taskArray.map((e) => {
+   const toggleStatus = (id) => {
+    const newArr = taskArray.map((e) => {
       if (e.id === id) {
         return { ...e, completed: !e.completed };
       }
       return e;
     });
-    return this.setState({
-      taskArray: [...newArr],
-    });
+    return setTaskArray([...newArr])
   };
 
-  deleteItem = (id) => {
-    const idx = this.state.taskArray.findIndex((e) => e.id === id);
-    return this.setState({
-      taskArray: this.state.taskArray.toSpliced(idx, 1),
-    });
+   const deleteItem = (id) => {
+    const idx = taskArray.findIndex((e) => e.id === id);
+    return setTaskArray(
+      taskArray.toSpliced(idx, 1),
+    );
   };
-  deleteCompletedTask = () => {
-    return this.setState({
-      taskArray: this.state.taskArray.filter((e) => e.completed !== true),
-    });
-  };
-
-  itemsLeft = () => {
-    return this.state.taskArray.filter((e) => e.completed === false).length;
+   const deleteCompletedTask = () => {
+    return setTaskArray(
+      taskArray.filter((e) => e.completed !== true),
+    );
   };
 
-  filteredTasks = (filter) => {
-    const { taskArray } = this.state;
+   const itemsLeft = () => {
+    return taskArray.filter((e) => e.completed === false).length;
+  };
+
+   const filteredTasks = (filter) => {
     switch (filter) {
       case 'all':
         return taskArray;
@@ -99,35 +90,33 @@ export default class App extends Component {
         return taskArray;
     }
   };
-  onFilterSelect = (filter) => {
-    this.setState({ filter });
+   const onFilterSelect = (filter) => {
+    setActiveFilter(filter)
   };
 
-  render() {
-    const { filter } = this.state;
-    const visibleTask = this.filteredTasks(filter);
+
+    const visibleTask = filteredTasks(activeFilter);
     return (
       <section className='todoapp'>
         <header className='header'>
           <h1>todos</h1>
-          <NewTaskForm addNewItem={this.addNewItem} />
+          <NewTaskForm addNewItem={addNewItem} />
         </header>
         <section className='main'>
           <TaskList
-            TaskArray={this.state.taskArray}
-            toggleStatus={() => this.toggleStatus}
-            deleteItem={() => this.deleteItem}
+            TaskArray={taskArray}
+            toggleStatus={() => toggleStatus}
+            deleteItem={() => deleteItem}
             tasks={visibleTask}
-            editTask={this.editTask}
+            editTask={editTask}
           />
           <Footer
-            itemsLeft={this.itemsLeft()}
-            filters={this.state.filters}
-            onFilterSelect={this.onFilterSelect}
-            deleteCompletedTask={this.deleteCompletedTask}
+            itemsLeft={itemsLeft()}
+            filters={filtersArray}
+            onFilterSelect={onFilterSelect}
+            deleteCompletedTask={deleteCompletedTask}
           />
         </section>
       </section>
     );
-  }
 }

@@ -1,29 +1,18 @@
-import { Component } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import "./Task.css";
-import { formatDistanceToNow } from "date-fns";
 import Timer from "../Timer";
 
-export default class Task extends Component {
-  static defaultProps = {
-    task: {},
-    toggleStatus() {},
-    deleteItem() {},
-  };
-  static propTypes = {
-    deleteItem: PropTypes.func,
-    toggleStatus: PropTypes.func,
-    task: PropTypes.object,
-  };
-  state = {
-    text: this.props.task.text,
+export const Task= ({task, toggleStatus, deleteItem, editTask}) => {
+  console.log(task)
+  const [item, setItem] = useState({text: task.text,
     editing: false,
-    toggle: this.props.task.completed,
-  };
+    toggle: task.completed,})
 
-  onChange = (e) => {
-    this.setState({
-      text: e.target.value,
+  const onChange = (e) => {
+    setItem({
+      ...item,
+      text: e.target.value
     });
   };
   // setDate = (created) => {
@@ -33,18 +22,17 @@ export default class Task extends Component {
   //   });
   // };
 
-  onSubmit = (e) => {
-    this.props.editTask(this.props.task.id, this.state.text);
-    this.setState({
+  const onSubmit = (e) => {
+    editTask(task.id, item.text);
+    setItem({
+      ...item,
       editing: false,
     });
     e.preventDefault();
   };
 
-  render() {
-    const { text, time, id, completed } = this.props.task;
-    const { toggleStatus, deleteItem } = this.props;
-    const taskClass = this.state.editing
+    const { text, time, id, completed } = task;
+    const taskClass = item.editing
       ? "editing"
       : completed
       ? "completed"
@@ -65,24 +53,36 @@ export default class Task extends Component {
           </label>
           <button
             className="icon icon-edit"
-            onClick={() => this.setState({ editing: true })}
+            onClick={() => setItem({...item, editing: true })}
           ></button>
           <button
             className="icon icon-destroy"
             onClick={() => deleteItem(id)}
           ></button>
         </div>
-        {this.state.editing && (
-          <form onSubmit={(e) => this.onSubmit(e)}>
+        {item.editing && (
+          <form onSubmit={(e) => onSubmit(e)}>
             <input
               type="text"
               class="edit"
-              value={this.state.text}
-              onChange={(e) => this.onChange(e)}
+              value={item.text}
+              onChange={(e) => onChange(e)}
             />
           </form>
         )}
       </li>
     );
-  }
 }
+
+
+Task.defaultProps = {
+  task: {},
+  toggleStatus() {},
+  deleteItem() {},
+};
+
+Task.propTypes = {
+  deleteItem: PropTypes.func,
+  toggleStatus: PropTypes.func,
+  task: PropTypes.object,
+};
